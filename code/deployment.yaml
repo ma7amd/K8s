@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backoffice-app
+  namespace: enterprise
+  labels:
+    app: backoffice-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: backoffice-app
+  template:
+    metadata:
+      labels:
+        app: backoffice-app
+    spec:
+      containers:
+      - name: backoffice-app
+        image: nginx:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "500M"
+            cpu: "0.5"
+          limits:
+            memory: "1Gi"
+            cpu: "1"               
+        ports:
+        - containerPort: 80
